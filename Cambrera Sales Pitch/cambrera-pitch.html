@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambrera - Sales Pitch Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #121212;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .presentation-container {
+            width: 90%;
+            max-width: 1200px;
+            height: 90vh;
+            background: #1a1a1a;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: #2a2a2a;
+            border-bottom: 1px solid #404040;
+        }
+        
+        .controls button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn {
+            background: #DAD091;
+            color: #121212;
+        }
+        
+        .nav-btn:hover {
+            background: #c5c287;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            background: #404040;
+            color: #888;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .slide-counter {
+            font-size: 14px;
+            color: #888;
+            font-weight: 500;
+            margin-left: 15px;
+        }
+        
+        .slide {
+            flex: 1;
+            padding: 60px;
+            display: none;
+            animation: slideIn 0.5s ease;
+            overflow-y: auto;
+            background: #121212;
+            color: #ffffff;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        .slide.active.hero-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        h1 {
+            font-size: 48px;
+            color: #ffffff;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 36px;
+            color: #DAD091;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        
+        .slide.active.cta-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .problem-card {
+            padding: 30px;
+            background: #2a2a2a;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid #404040;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-10px);
+            border-color: #DAD091;
+        }
+        
+        .problem-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .problem-stat {
+            font-size: 36px;
+            color: #DAD091;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .solution-feature {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #2a2a2a;
+            border-radius: 10px;
+            border: 1px solid #404040;
+        }
+        
+        .feature-icon {
+            font-size: 36px;
+            color: #DAD091;
+        }
+        
+        .feature-text {
+            flex: 1;
+        }
+        
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .process-step {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: #DAD091;
+            color: #121212;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        .arrow {
+            font-size: 30px;
+            color: #DAD091;
+        }
+        
+        .roi-calculator {
+            background: #2a2a2a;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 1px solid #404040;
+        }
+        
+        .input-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .input-field {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-field label {
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+        
+        .input-field input {
+            padding: 12px;
+            border: 2px solid #404040;
+            background: #1a1a1a;
+            color: #ffffff;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .input-field input:focus {
+            border-color: #DAD091;
+            outline: none;
+        }
+        
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .result-card {
+            background: #1a1a1a;
+            border: 1px solid #404040;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            color: #ffffff;
+        }
+        
+        .result-value {
+            font-size: 32px;
+            color: #DAD091;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .pricing-card {
+            background: #2a2a2a;
+            border: 1px solid #404040;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        .pricing-card.featured {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(218, 208, 145, 0.3);
+            border: 3px solid #DAD091;
+        }
+        
+        .price-tag {
+            font-size: 42px;
+            color: #DAD091;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .price-desc {
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 20px 60px;
+            background: linear-gradient(135deg, #DAD091 0%, #c5c287 100%);
+            color: #121212;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(218, 208, 145, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(218, 208, 145, 0.4);
+        }
+        
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+        
+        .benefit-list li {
+            padding: 15px 0;
+            padding-left: 40px;
+            position: relative;
+            font-size: 18px;
+            color: #ffffff;
+        }
+        
+        .benefit-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #DAD091;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .testimonial {
+            background: #2a2a2a;
+            border: 1px solid #404040;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid #DAD091;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            font-size: 20px;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            text-align: right;
+            color: #DAD091;
+            font-weight: bold;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #DAD091 0%, #c5c287 100%);
+            color: #121212;
+            border-radius: 15px;
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 18px;
+            opacity: 0.8;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #404040;
+            background: #2a2a2a;
+        }
+        
+        .comparison-table th {
+            background: #DAD091;
+            color: #121212;
+            font-weight: bold;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #1a1a1a;
+        }
+        
+        .check {
+            color: #DAD091;
+            font-size: 24px;
+        }
+        
+        .cross {
+            color: #ff6b6b;
+            font-size: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            h2 {
+                font-size: 28px;
+            }
+            
+            .controls {
+                padding: 15px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+	<div class="presentation-container">
+		<div class="controls">
+			<div style="display: flex; align-items: center;">
+				<button class="nav-btn" onclick="prevSlide()" id="prevBtn">← Zurück</button>
+				<span class="slide-counter" id="slideCounter">Slide 1 / 6</span>
+			</div>
+			<div style="display: flex; align-items: center; justify-content: center; flex: 1;">
+				<div style="width: 60px; height: 60px; background: #DAD091; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+					<img src="Cambrera_logo_600.png" style="width: 80px; height: 70px; object-fit: contain;">
+				</div>
+			</div>
+			<button class="nav-btn" onclick="nextSlide()" id="nextBtn">Weiter →</button>
+		</div>
+        
+        <!-- SLIDES -->
+        <div id="blitz-slides">
+            <!-- Slide 1: Hero -->
+            <div class="slide active hero-slide">
+                <h1>Ihr Restaurant.<br>Ohne Personalmangel.</h1>
+                <h3 style="color: #aaa; margin: 30px 0;">Mit Cambrera sparen Sie 25% Personalkosten und steigern Ihren Umsatz um 30%</h3>
+                <div class="stats-grid" style="margin-top: 60px; max-width: 800px;">
+                    <div class="stat-card">
+                        <div class="stat-number">25%</div>
+                        <div class="stat-label">Weniger Personal</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">30%</div>
+                        <div class="stat-label">Mehr Umsatz</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">0€</div>
+                        <div class="stat-label">Monatliche Fixkosten</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 2: Das Problem -->
+            <div class="slide">
+                <h2>Ihre täglichen Herausforderungen</h2>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon">💸</div>
+                        <div class="problem-stat">35.000€</div>
+                        <p>kostet Sie JEDER Kellner pro Jahr</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon">ⱖï¸</div>
+                        <div class="problem-stat">15 Min</div>
+                        <p>wartet ein Gast durchschnittlich auf Bedienung</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon">😤</div>
+                        <div class="problem-stat">40%</div>
+                        <p>der Gäste gehen wegen Wartezeiten</p>
+                    </div>
+                </div>
+                <div class="testimonial" style="margin-top: 40px;">
+                    <div class="testimonial-text">"Ihre Gäste kommen nicht, um zu warten – sie kommen für ein reibungsloses Erlebnis. Cambrera macht jede Interaktion schneller, klarer und angenehmer."</div>
+                    <div class="testimonial-author">- Cambrera Founder,2024</div>
+                </div>
+            </div>
+            
+            <!-- Slide 3: So funktioniert's -->
+            <div class="slide">
+                <h2>So einfach ist Cambrera</h2>
+                <div class="process-flow">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3>QR-Code scannen</h3>
+                        <p>Gast sieht Menü in Echtzeit</p>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3>Touch bestätigen</h3>
+                        <p>Bestellung geht zur Küche</p>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3>LED-Status</h3>
+                        <p>Jeder sieht: bezahlt/offen</p>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h3>Direkt bezahlen</h3>
+                        <p>Apple Pay, Karte oder Bar</p>
+                    </div>
+                </div>
+                <div style="margin-top: 40px; padding: 30px; background: #2a4a2a; border-radius: 15px; border: 1px solid #4a7c4a;">
+                    <h3 style="color: #DAD091;">✓ Keine Fake-Bestellungen (Touch-Sensor vor Ort)</h3>
+                    <h3 style="color: #DAD091;">✓ Keine gestohlenen Tablets</h3>
+                    <h3 style="color: #DAD091;">✓ 4 Tage Akkulaufzeit</h3>
+                </div>
+            </div>
+            
+            <!-- Slide 4: ROI Rechner -->
+            <div class="slide">
+                <h2>Ihre Ersparnis - Live berechnet</h2>
+                <div class="roi-calculator">
+                    <div class="input-group">
+                        <div class="input-field">
+                            <label>Anzahl Ihrer Tische</label>
+                            <input type="number" id="tables" value="50" onchange="calculateROI()">
+                        </div>
+                        <div class="input-field">
+                            <label>Anzahl Ihrer Kellner</label>
+                            <input type="number" id="waiters" value="5" onchange="calculateROI()">
+                        </div>
+                        <div class="input-field">
+                            <label>Durchschnittlicher Bon (€)</label>
+                            <input type="number" id="avgCheck" value="35" onchange="calculateROI()">
+                        </div>
+                    </div>
+                    <div class="results">
+                        <div class="result-card">
+                            <div>Einmalige Investition</div>
+                            <div class="result-value" id="investment" style="color: #ff6b6b;">8.950€</div>
+                        </div>
+                        <div class="result-card">
+                            <div>Jährliche Ersparnis</div>
+                            <div class="result-value" id="savings">35.000€</div>
+                        </div>
+                        <div class="result-card">
+                            <div>Amortisation</div>
+                            <div class="result-value" id="payback">3 Monate</div>
+                        </div>
+                        <div class="result-card">
+                            <div>Zusatzumsatz/Jahr</div>
+                            <div class="result-value" id="revenue">126.000€</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 5: Preise -->
+            <div class="slide">
+                <h2>Transparent & Fair</h2>
+                <div class="pricing-cards">
+                    <div class="pricing-card">
+                        <h3>Hardware</h3>
+                        <div class="price-tag">179€</div>
+                        <div class="price-desc">Einmalig pro Gerät</div>
+                        <ul class="benefit-list">
+                            <li>CE-zertifiziert</li>
+                            <li>Patentiert</li>
+                            <li>4 Tage Akkulaufzeit</li>
+                            <li>Von der Steuer absetzbar</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card featured">
+                        <h3>Transaktionen</h3>
+                        <div class="price-tag">3,9% + 0,25€</div>
+                        <div class="price-desc">Nur bei Online-Zahlung</div>
+                        <ul class="benefit-list">
+                            <li>KEINE monatlichen Fixkosten</li>
+                            <li>Inklusive Software</li>
+                            <li>Inklusive Bankgebühren</li>
+                            <li>24/7 Support inklusive</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 40px; padding: 30px; background: #3a3a2a; border-radius: 15px; border: 1px solid #DAD091;">
+                    <h3 style="color: #DAD091;">💡 Sie zahlen NUR wenn Gäste online bezahlen!</h3>
+                    <p style="color: #DAD091;">Bei Barzahlung entstehen KEINE Gebühren</p>
+                </div>
+            </div>
+            
+            <!-- Slide 6: CTA -->
+            <div class="slide cta-slide">
+                <div style="text-align: center;">
+                    <h1>Starten Sie JETZT!</h1>
+                    <h3 style="color: #aaa; margin: 30px 0;">Während Ihre Konkurrenz noch Kellner sucht, machen Sie bereits mehr Umsatz</h3>
+                    <div class="cta-section">
+                        <a href="#" class="cta-button">30 Tage kostenlos testen</a>
+                    </div>
+                    <div class="stats-grid" style="margin-top: 60px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        <div class="stat-card">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Risikofrei</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Support vor Ort</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentSlide = 0;
+        const blitzSlides = document.querySelectorAll('#blitz-slides .slide');
+        let totalSlides = blitzSlides.length;
+        
+        function showSlide(index) {
+            const slides = document.querySelectorAll('#blitz-slides .slide');
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            if (index >= 0 && index < slides.length) {
+                slides[index].classList.add('active');
+                currentSlide = index;
+                updateCounter();
+                updateButtons();
+            }
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+        
+        function updateCounter() {
+            document.getElementById('slideCounter').textContent = 
+                `Slide ${currentSlide + 1} / ${totalSlides}`;
+        }
+        
+        function updateButtons() {
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+        
+        function calculateROI() {
+            const tables = parseInt(document.getElementById('tables').value) || 0;
+            const waiters = parseInt(document.getElementById('waiters').value) || 0;
+            const avgCheck = parseInt(document.getElementById('avgCheck').value) || 0;
+            
+            // Investition
+            const investment = tables * 179;
+            document.getElementById('investment').textContent = 
+                investment.toLocaleString('de-DE') + '€';
+            
+            // Ersparnis (1-2 Kellner weniger)
+            const savedWaiters = Math.max(1, Math.floor(waiters * 0.25));
+            const savings = savedWaiters * 35000;
+            document.getElementById('savings').textContent = 
+                savings.toLocaleString('de-DE') + '€';
+            
+            // Amortisation
+            const paybackMonths = Math.ceil((investment / savings) * 12);
+            document.getElementById('payback').textContent = 
+                paybackMonths + ' Monate';
+            
+            // Zusatzumsatz (30% mehr Durchsatz, 300 Tage/Jahr, 20 Sitzungen/Tag)
+            const additionalRevenue = tables * 20 * avgCheck * 0.3 * 300;
+            document.getElementById('revenue').textContent = 
+                Math.round(additionalRevenue).toLocaleString('de-DE') + '€';
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'f' || e.key === 'F') {
+                document.documentElement.requestFullscreen();
+            }
+            if (e.key === 'Escape') {
+                document.exitFullscreen();
+            }
+        });
+        
+        // Initialize
+        calculateROI();
+        updateButtons();
+    </script>
+</body>
+</html>
